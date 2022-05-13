@@ -6,8 +6,42 @@
   </div>
 
   <div class="main theme">
+  
     <div class="problem-nav">
-      <p>임시 problem nav bar </p>
+      <div class="columns is-variable is-1-mobile is-0-tablet is-2-desktop is-8-widescreen">
+        <div class="column is-one-quarter">
+          <br>  <p style="text-indent: 20px;font-size:25px"><b>{{topic}}</b></p>
+        </div>
+        <div class="column is-two-fifths">
+        </div>
+        
+        <div class="column">
+          <div class="buttons">
+            <b-button type="is-light">light</b-button>
+            <b-button type="is-dark">dark</b-button>
+          </div>
+        </div>
+        <div class="column">
+          <b-dropdown aria-role="list">
+              <template #trigger="{ active }">
+                  <b-button
+                      label="C++"
+                      type="is-primary"
+                      :icon-right="active ? 'menu-up' : 'menu-down'" />
+              </template>
+              <b-dropdown-item aria-role="listitem">Python</b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">JAVA</b-dropdown-item>
+              <b-dropdown-item aria-role="listitem">GO</b-dropdown-item>
+          </b-dropdown>
+        </div>
+        <div class="column">
+          <img src="./assets/account.png"/>
+          <img src="./assets/home.png"/>
+          <img src="./assets/dashboard.png"/>
+        </div>
+
+      </div>
+      
     </div>
     
     <div class="contents">
@@ -29,9 +63,13 @@
 
 export default {
   name: 'App',
+  data(){
+    return{
+      topic : "알고리즘 문제"
+    }
+  },
   components: {
-    
-    
+
   }
 }
 </script>
@@ -56,10 +94,10 @@ html, body {
   background-color: #F0FFF0;
 }
 .problem-nav{
-  background-color: #00FFFF;
-  height:5%;
+  height:7%;
   width:100%;
 }
+
 .contents{
   height:80%;
   width:100%;
