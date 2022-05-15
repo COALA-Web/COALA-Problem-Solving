@@ -51,7 +51,26 @@
     </div>
 
     <div class="bottom-section">
-      <p>bottom section</p>
+      <div class="columns">
+        <div class="column is-one-quarter">
+          <div class="buttons">
+            <b-button type="is-primary" inverted>질문하기</b-button>
+            <b-button type="is-primary" inverted>코드 리뷰 보기</b-button>
+          </div>
+        </div>
+        <div class="column is-half"></div>
+        <div class="column is-one-quarter">
+          <div class="buttons">
+            <b-button type="is-primary" inverted>다른 사람 풀이보기</b-button>
+            <b-button type="is-primary" inverted>초기화</b-button>
+            <b-button type="is-primary" inverted>실행</b-button>
+            <b-button type="is-primary" inverted>제출</b-button>
+          </div>
+        </div>
+
+          
+
+      </div>
     </div>
   </div>
 
@@ -123,7 +142,6 @@ html, body {
 .bottom-section{
   height:10%;
   width:100%;
-  background-color: #7FFFD4;
 }
 
 
