@@ -130,7 +130,7 @@ html, body {
 }
 .guide-section{
   /* background-color:#666666; */
-  width: calc(50% - 12px);
+  width: calc(50% - 8px);
   height: 100%;
   display: inline-block;
   padding: 1em;
@@ -143,14 +143,14 @@ html, body {
   text-align: center;
 }
 .gutter-horizontal{
-  width: 24px;
+  width: 16px;
   height: 100%;
-  background-color: #643563;
+  background-image: url(./assets/gutter.png);
   display: inline-block;
 }
 .run-section{
   background-color:#126952;
-  width: calc(50% - 12px);
+  width: calc(50% - 8px);
   height: 100%;
   display: inline-block;
 }
