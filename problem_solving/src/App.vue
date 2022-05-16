@@ -45,7 +45,13 @@
     </div>
     
     <div class="contents">
-      <div class="guide-section"></div>
+      <div class="guide-section">
+        <h6 class="guide-section-title"><b>문제 설명</b></h6>
+        <hr>
+        <ProblemOne/>
+          
+        
+      </div>
       <div class="gutter-horizontal"></div>
       <div class="run-section"></div> 
     </div>
@@ -78,6 +84,7 @@
 </template>
 
 <script>
+import ProblemOne from './components/ProblemOne.vue'
 
 
 export default {
@@ -88,7 +95,7 @@ export default {
     }
   },
   components: {
-
+    ProblemOne
   }
 }
 </script>
@@ -122,10 +129,18 @@ html, body {
   width:100%;
 }
 .guide-section{
-  background-color:#666666;
-  width: calc(40% - 12px);
+  /* background-color:#666666; */
+  width: calc(50% - 12px);
   height: 100%;
   display: inline-block;
+  padding: 1em;
+  overflow:scroll
+}
+.guide-section-title{
+  font-family: arial;
+  font-size: 18px;
+  margin: 1em 0px;
+  text-align: center;
 }
 .gutter-horizontal{
   width: 24px;
@@ -135,7 +150,7 @@ html, body {
 }
 .run-section{
   background-color:#126952;
-  width: calc(60% - 12px);
+  width: calc(50% - 12px);
   height: 100%;
   display: inline-block;
 }
