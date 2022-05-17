@@ -22,17 +22,52 @@
           </div>
         </div>
         <div class="column">
-          <b-dropdown aria-role="list">
-              <template #trigger="{ active }">
-                  <b-button
-                      label="C++"
-                      type="is-primary"
-                      :icon-right="active ? 'menu-up' : 'menu-down'" />
-              </template>
-              <b-dropdown-item aria-role="listitem">Python</b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">JAVA</b-dropdown-item>
-              <b-dropdown-item aria-role="listitem">GO</b-dropdown-item>
-          </b-dropdown>
+         
+          <b-dropdown v-model="language" aria-role="list">
+            <template v-if="language=='Go'" #trigger>
+              <b-button
+                label="Go"
+                type="is-primary"
+              />
+            </template>
+            <template v-else-if="language=='Python3'" #trigger>
+              <b-button
+                label="Python3"
+                type="is-primary"
+              />
+            </template>
+            <template v-else-if="language=='JavaScript'" #trigger>
+              <b-button 
+                label="JavaScript"
+                type="is-primary"
+                
+              />
+            </template>
+            <b-dropdown-item :value="'Go'" aria-role="listitem" @click="active_go()" >
+              <div class="media">
+                <div class="media-content" >
+                    <h3>Go</h3>
+                </div>
+              </div>
+            </b-dropdown-item>
+              <b-dropdown-item :value="'Python3'" aria-role="listitem" @click="active_python()">
+              <div class="media">
+                <div class="media-content">
+                  <h3>Python3</h3>
+                </div>
+              </div>
+            </b-dropdown-item>
+            <b-dropdown-item :value="'JavaScript'" aria-role="listitem" @click="active_javaScript()">
+              <div class="media">
+                <div class="media-content">
+                    <h3>JavaScript</h3>
+                </div>
+              </div>
+            </b-dropdown-item>
+
+        </b-dropdown>
+
+
         </div>
         <div class="column">
           <img src="./assets/account.png"/>
@@ -94,24 +129,50 @@ import * as CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/eclipse.css';
 import 'codemirror/mode/javascript/javascript.js';
+// import 'codemirror/mode/clike/clike.js'; // not working
+import 'codemirror/mode/python/python.js';
+import 'codemirror/mode/go/go.js';
+
 
 export default {
   name: 'App',
   data(){
     return{
       topic : "알고리즘 문제",
-      content: 'let a=0;\n#hello world',
+      content: 'def solution(id_list, report, k):\n\tanswer = []\n\treturn answer\n',
+      language: "Python3",
     }
   },
   components: {
     ProblemOne
   },
   mounted(){
-    CodeMirror.fromTextArea(document.getElementById('editor'),{
+    this.cm = CodeMirror.fromTextArea(document.getElementById('editor'),{
       lineNumbers: true,
       mode: 'javascript',
       theme: 'eclipse',
     });
+  },
+  methods: {
+    active_go(){
+      // alert("Go");
+      this.cm.setOption('mode','go');
+      this.content = "func solution(id_list []string, report []string, k int) []int {\n\treturn []int{}\n}\n\n\n\n"
+      this.cm.setOption('value',this.content);
+    },
+    active_python(){
+      // alert("python");
+      this.cm.setOption('mode','python')
+      this.content = "def solution(id_list, report, k):\n\tanswer = []\n\treturn answer\n";
+      this.cm.setOption('value',this.content);
+    },
+    active_javaScript(){
+      // alert("javascript");
+      this.cm.setOption('mode','javascript')
+      this.content = "function solution(id_list, report, k) {\n\tvar answer = [];\n\treturn answer;\n}";
+      this.cm.setOption('value',this.content);
+    },
+    
   }
 }
 </script>
