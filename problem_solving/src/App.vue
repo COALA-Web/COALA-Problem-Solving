@@ -49,14 +49,19 @@
         <h6 class="guide-section-title"><b>문제 설명</b></h6>
         <hr>
         <ProblemOne/>
-          
-        
       </div>
       <div class="gutter-horizontal"></div>
-      <div class="run-section"></div> 
+      <div class="run-section">
+        <div class="editor-section">
+          <h6 class="editor-section-title"><b>Solution.cpp</b></h6>
+          <div class="editor-section-contents">
+            <textarea v-model="content" id="editor"></textarea>
+          </div>    
+        </div>
+      </div> 
     </div>
 
-    <div class="bottom-section">
+    <div class="bottom-section" >
       <div class="columns">
         <div class="column is-one-quarter">
           <div class="buttons">
@@ -84,18 +89,29 @@
 </template>
 
 <script>
-import ProblemOne from './components/ProblemOne.vue'
-
+import ProblemOne from './components/ProblemOne.vue';
+import * as CodeMirror from 'codemirror';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/eclipse.css';
+import 'codemirror/mode/javascript/javascript.js';
 
 export default {
   name: 'App',
   data(){
     return{
-      topic : "알고리즘 문제"
+      topic : "알고리즘 문제",
+      content: 'let a=0;\n#hello world',
     }
   },
   components: {
     ProblemOne
+  },
+  mounted(){
+    CodeMirror.fromTextArea(document.getElementById('editor'),{
+      lineNumbers: true,
+      mode: 'javascript',
+      theme: 'eclipse',
+    });
   }
 }
 </script>
@@ -149,13 +165,35 @@ html, body {
   display: inline-block;
 }
 .run-section{
-  background-color:#126952;
   width: calc(50% - 8px);
   height: 100%;
   display: inline-block;
+  
+}
+.editor-section{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.editor-section-title{
+  font-size: 18px;
+  margin: 1em 30px;
+}
+.editor-section-contents{
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  top: 0;
+  left: 0;
+}
+.CodeMirror {
+    font-family: monospace;
+    height: 100%;
+    color: black;
+    direction: ltr;
 }
 .bottom-section{
-  height:10%;
+  height:8%;
   width:100%;
 }
 
