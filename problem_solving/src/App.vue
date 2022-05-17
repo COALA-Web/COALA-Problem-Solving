@@ -193,6 +193,7 @@ html, body {
     direction: ltr;
 }
 .bottom-section{
+  margin: 1em;
   height:8%;
   width:100%;
 }
