@@ -149,7 +149,7 @@ export default {
   mounted(){
     this.cm = CodeMirror.fromTextArea(document.getElementById('editor'),{
       lineNumbers: true,
-      mode: 'javascript',
+      mode: 'python',
       theme: 'eclipse',
     });
   },
