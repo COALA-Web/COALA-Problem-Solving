@@ -79,16 +79,20 @@
       
     </div>
     
-    <div class="contents">
-      <div class="guide-section">
+    <div class="contents" @mouseup="verticalMsup()" @mousemove="verticalMove">
+      <div class="guide-section" :style="guideStyle">
         <h6 class="guide-section-title"><b>문제 설명</b></h6>
         <hr>
         <ProblemOne/>
       </div>
-      <div class="gutter-horizontal"></div>
-      <div class="run-section">
+      <div class="gutter-vertical" id="resize" @mousedown="verticalMsdwn()"   >
+        <!-- <p> {{click}}</p>
+        <p> {{counter}}</p> -->
+
+      </div>
+      <div class="run-section" :style="runStyle">
         <div class="editor-section">
-          <h6 class="editor-section-title"><b>Solution.cpp</b></h6>
+          <h6 class="editor-section-title"><b>Solution.cpp {{click}}</b></h6>
           <div class="editor-section-contents">
             <textarea v-model="content" id="editor"></textarea>
           </div>    
@@ -141,6 +145,18 @@ export default {
       topic : "알고리즘 문제",
       content: 'def solution(id_list, report, k):\n\tanswer = []\n\treturn answer\n',
       language: "Python3",
+      click: false,
+      counter: 0,
+
+      
+      guideStyle:{
+        backgroundColor : '#F0FFF0',
+        width: 'calc(50% - 8px)'
+      },
+      runStyle:{
+        width:'calc(50% - 8px)'
+      },
+      windowWidth: window.innerWidth,
     }
   },
   components: {
@@ -169,10 +185,32 @@ export default {
     active_javaScript(){
       // alert("javascript");
       this.cm.setOption('mode','javascript')
-      this.content = "function solution(id_list, report, k) {\n\tvar answer = [];\n\treturn answer;\n}";
+      this.content = "function solution(id_list, report, k) {\n\tvar answer = [];\n\treturn answer;\n}\n";
       this.cm.setOption('value',this.content);
     },
-    
+    verticalMsdwn(){
+      this.click = true;
+      console.log('d');
+    },
+    verticalMsup(){
+      this.click = false;
+    },
+    verticalMove(event){
+      let mouseX = event.clientX;
+
+      let halfGutterPercent = (8/this.windowWidth)*100+0.1;
+      let widthPercent = (mouseX / this.windowWidth) * 100;
+      
+      // console.log(widthPercent-gutterPercent);
+      // console.log(100-widthPercent+gutterPercent);
+
+      
+      if(this.click == true){
+        console.log('work');
+        this.guideStyle.width=(widthPercent-halfGutterPercent)+'%';
+        this.runStyle.width=(100-widthPercent-halfGutterPercent) + '%';
+      }
+    }
   }
 }
 </script>
@@ -207,6 +245,7 @@ html, body {
 }
 .guide-section{
   /* background-color:#666666; */
+  /* --test-value: 50%; */
   width: calc(50% - 8px);
   height: 100%;
   display: inline-block;
@@ -219,7 +258,7 @@ html, body {
   margin: 1em 0px;
   text-align: center;
 }
-.gutter-horizontal{
+.gutter-vertical{
   width: 16px;
   height: 100%;
   background-image: url(./assets/gutter.png);
