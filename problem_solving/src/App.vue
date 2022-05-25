@@ -81,22 +81,25 @@
     
     <div class="contents" @mouseup="verticalMsup()" @mousemove="verticalMove">
       <div class="guide-section" :style="guideStyle">
-        <h6 class="guide-section-title"><b>문제 설명</b></h6>
+        <h6 class="guide-section-title"><b>문제 설명 {{this.horizontalClick }}</b></h6>
         <hr>
         <ProblemOne/>
       </div>
-      <div class="gutter-vertical" id="resize" @mousedown="verticalMsdwn()"   >
+      <div class="gutter-vertical" @mousedown="verticalMsdwn()"   >
         <!-- <p> {{click}}</p>
         <p> {{counter}}</p> -->
 
       </div>
       <div class="run-section" :style="runStyle">
-        <div class="editor-section">
+        <div class="editor-section" @mouseup="horizontalMsup()" @mousemove="horizontalMove">
           <h6 class="editor-section-title"><b>Solution.cpp </b></h6>
-          <div class="editor-section-contents">
+          <div class="editor-section-contents" :style="editorStyle">
             <textarea v-model="content" id="editor"></textarea>
           </div>
-              
+          <div class="gutter-horizontal"  @mousedown="horizontalMsdwn()"></div>
+          <div class="result-section" :style="resultStyle">
+            <p><b>실행 결과는 여기에 표시됩니다.</b></p>
+          </div>
         </div>
       </div> 
     </div>
@@ -147,17 +150,25 @@ export default {
       content: 'def solution(id_list, report, k):\n\tanswer = []\n\treturn answer\n',
       language: "Python3",
       verticalClick: false,
+      horizontalClick: false,
       counter: 0,
 
       
       guideStyle:{
-        backgroundColor : '#F0FFF0',
         width: 'calc(50% - 8px)'
       },
       runStyle:{
         width:'calc(50% - 8px)'
       },
+      editorStyle:{
+        height: '59%'
+      },
+      resultStyle:{
+        height: '39%'
+      },
+      
       windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight,
     }
   },
   components: {
@@ -191,7 +202,6 @@ export default {
     },
     verticalMsdwn(){
       this.verticalClick = true;
-      console.log('d');
     },
     verticalMsup(){
       this.verticalClick = false;
@@ -201,15 +211,30 @@ export default {
 
       let halfGutterPercent = (8/this.windowWidth)*100+0.1;
       let widthPercent = (mouseX / this.windowWidth) * 100;
-      
-      // console.log(widthPercent-gutterPercent);
-      // console.log(100-widthPercent+gutterPercent);
 
-      
       if(this.verticalClick == true){
-        console.log('work');
+        
         this.guideStyle.width=(widthPercent-halfGutterPercent)+'%';
         this.runStyle.width=(100-widthPercent-halfGutterPercent) + '%';
+      }
+    },
+    horizontalMsdwn(){
+      
+      this.horizontalClick = true;
+      console.log("down");
+    },
+    horizontalMsup(){
+      this.horizontalClick = false;
+      console.log("up");
+    },
+    horizontalMove(event){
+      let mouseY = event.clientY;
+      console.log(mouseY);
+      let halfGutterPercent = (8/this.windowHeight)*100+0.1;
+      let heightPercent = (mouseY / this.windowHeight) * 100;
+      if(this.horizontalClick == true){
+        this.editorStyle.height=(heightPercent-halfGutterPercent)+'%';
+        this.resultStyle.height=(100-heightPercent-halfGutterPercent) + '%';
       }
     }
   }
@@ -233,7 +258,7 @@ html, body {
   width:100%;
 }
 .theme {
-  background-color: #F0FFF0;
+  background-color: #F0F0F0;
 }
 .problem-nav{
   height:7%;
@@ -282,11 +307,21 @@ html, body {
 }
 .editor-section-contents{
   width: 100%;
-  height: 100%;
+  height: 59%;
   overflow: scroll;
   top: 0;
   left: 0;
 }
+.gutter-horizontal{
+  width: 100%;
+  height: 16px;
+  background-image: url(./assets/horizontal-gutter.png);
+}
+.result-section{
+  height: 39%;
+  background-color:#E6E6FA;
+}
+
 .CodeMirror {
     font-family: monospace;
     height: 100%;
