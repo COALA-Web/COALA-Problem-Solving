@@ -92,10 +92,11 @@
       </div>
       <div class="run-section" :style="runStyle">
         <div class="editor-section">
-          <h6 class="editor-section-title"><b>Solution.cpp {{click}}</b></h6>
+          <h6 class="editor-section-title"><b>Solution.cpp </b></h6>
           <div class="editor-section-contents">
             <textarea v-model="content" id="editor"></textarea>
-          </div>    
+          </div>
+              
         </div>
       </div> 
     </div>
@@ -145,7 +146,7 @@ export default {
       topic : "알고리즘 문제",
       content: 'def solution(id_list, report, k):\n\tanswer = []\n\treturn answer\n',
       language: "Python3",
-      click: false,
+      verticalClick: false,
       counter: 0,
 
       
@@ -189,11 +190,11 @@ export default {
       this.cm.setOption('value',this.content);
     },
     verticalMsdwn(){
-      this.click = true;
+      this.verticalClick = true;
       console.log('d');
     },
     verticalMsup(){
-      this.click = false;
+      this.verticalClick = false;
     },
     verticalMove(event){
       let mouseX = event.clientX;
@@ -205,7 +206,7 @@ export default {
       // console.log(100-widthPercent+gutterPercent);
 
       
-      if(this.click == true){
+      if(this.verticalClick == true){
         console.log('work');
         this.guideStyle.width=(widthPercent-halfGutterPercent)+'%';
         this.runStyle.width=(100-widthPercent-halfGutterPercent) + '%';
