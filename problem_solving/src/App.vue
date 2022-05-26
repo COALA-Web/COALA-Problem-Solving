@@ -81,7 +81,7 @@
     
     <div class="contents" @mouseup="verticalMsup()" @mousemove="verticalMove">
       <div class="guide-section" :style="guideStyle">
-        <h6 class="guide-section-title"><b>문제 설명 {{this.horizontalClick }}</b></h6>
+        <h6 class="guide-section-title"><b>문제 설명</b></h6>
         <hr>
         <ProblemOne/>
       </div>
@@ -98,7 +98,60 @@
           </div>
           <div class="gutter-horizontal"  @mousedown="horizontalMsdwn()"></div>
           <div class="result-section" :style="resultStyle">
-            <p><b>실행 결과는 여기에 표시됩니다.</b></p>
+
+
+            <!-- default State -->
+            <!-- <p><b>실행 결과는 여기에 표시됩니다.</b></p> -->
+
+
+            <!-- test Case State -->
+            <p style="font-size:xx-large; color:red">Wrong Answer</p>
+            <!-- <p style="font-size:xx-large; color:green">Right Answer</p> -->
+            <div class="test Input">
+              <span style="font-size:x-large">Input : </span>
+              <span style="width:100%; font-size:x-large;background-color: #F0F0FF">  {{testCaseInput}}  </span>
+            </div>
+            <div class="test Output">
+              <span style=" font-size:x-large">Output : </span>
+              <span style=" font-size:x-large;background-color: #F0F0FF">  {{testCaseOutput}}  </span>
+            </div>
+            <div class="test Expected">
+              <span style="font-size:x-large">Expected : </span>
+              <span style="font-size:x-large;background-color: #F0F0FF">  {{testCaseExpected}}  </span>
+            </div>
+
+            <!-- Submit Case State - success-->
+            
+            <!-- <p style="font-size:xx-large; color:green">Success</p>
+            <div style="margin-top:10px;font-style: oblique;font-size:medium">
+              <span style="font-size:x-large">Runtime : </span>
+              <span style="font-size:x-large">{{runtime}}</span>
+              <span>으로 {{topic}} 문제에 대해 </span>
+              <span style="font-size:x-large">{{runtimeP}}</span>
+              <span> 의 {{language}} 제출 결과 통계 보다 빠릅니다.</span>
+            </div>
+            <div style="font-style: oblique;font-size:medium">
+              <span style="font-size:x-large">Memory Usage : </span>
+              <span style="font-size:x-large">{{memoryUse}}</span>
+              <span>으로 {{topic}} 문제에 대해 </span>
+              <span style="font-size:x-large">{{memoryUseP}}</span>
+              <span> 의 {{language}} 제출 결과 통계 보다 빠릅니다.</span>
+            </div>
+             -->
+            <!-- Submit Case State - failed-->
+            <!-- <p style="font-size:xx-large; color:red">Failed</p>
+            <div class="Input">
+              <div style="width:100%; float:left;font-size:x-large;background-color: #F0F0FF">  Input : {{testCaseInput}}  </div>
+            </div>
+            <div class="Output">
+              <div style="margin-top:10px;width:100%; float:left;font-size:x-large;background-color: #F0F0FF">  Output : {{testCaseOutput}}  </div>
+            </div>
+            <div class="Expected">
+              <div style="margin-top:10px;width:100%; float:left;font-size:x-large;background-color: #F0F0FF"> Expected : {{testCaseExpected}}  </div>
+            </div> -->
+
+
+
           </div>
         </div>
       </div> 
@@ -152,7 +205,6 @@ export default {
       verticalClick: false,
       horizontalClick: false,
       counter: 0,
-
       
       guideStyle:{
         width: 'calc(50% - 8px)'
@@ -161,12 +213,19 @@ export default {
         width:'calc(50% - 8px)'
       },
       editorStyle:{
-        height: '59%'
+        height: '69%'
       },
       resultStyle:{
-        height: '39%'
+        height: '29%'
       },
-      
+      testCaseInput : [1,5,2,3,5,15,6],
+      testCaseOutput : 3,
+      testCaseExpected : 2,
+      runtime : "251ms",
+      runtimeP : "41%",
+      memoryUse : "19.8MB",
+      memoryUseP : "96.35%",
+
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
     }
@@ -319,7 +378,7 @@ html, body {
 }
 .result-section{
   height: 39%;
-  background-color:#E6E6FA;
+  background-color:LightGray;
 }
 
 .CodeMirror {
